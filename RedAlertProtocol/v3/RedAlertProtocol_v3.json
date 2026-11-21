@@ -1,173 +1,41 @@
 {
-  "Name": "Red Alert Protocol v2 ja",
+  "Name": "Red Alert Protocol v3",
   "Description": "
 
   !! Host requires CD2 update 18 or newer !!
 
   Concept:
-    Hazard 5+ 全Modifiers適用環境を基準に設計した、Haz5.5x2風の難易度プリセット。
-    Hazard 5のゲームテンポと各種パラメータをベースに調整。
-    難易度のピークをAlert Swarmにフォーカスさせ
-    大規模戦闘以外の時間帯は意図的に圧力を抑えている。
-    独自の敵、Eliteバリエーション、およびミッション固有のゲームプレイ調整を導入しつつ、
-    野良ロビーでも遊べるよう設計。
+    A public-lobby-oriented difficulty based on Hazard 5 pacing and core gameplay,
+    while preserving the vanilla experience.
 
-    敵数よりも状況判断を重視し、ランダム要素によって毎回異なる展開になるよう設計されています。
+    Designed to scale enemy counts through the Hazard 5+ More Enemies modifier,
+    with ME2 targeting Haz5.5x2-like enemy density.
 
-  公開ロビー向け:
-    - 公開ロビー向けにバランス調整
-    - クライアント側のMOD導入不要
-    - Alert Swarmが主な脅威
-    - 優先ターゲットの排除が重要
-    - ナイトラ80設定
+    Difficulty peaks are concentrated around Alert Swarms,
+    while pressure outside major engagements is kept roughly comparable to vanilla.
 
-  What's New v2:
-  - RED ALERTシステム
-    一部のAlert Swarmが追加増援を伴う高危険度イベントへ発展します。
-  - Gold Riskイベント
-    Goldを掘りすぎると、危険な敵を引き寄せることがあります。
-  - Veteranグループシステム
-    カスタムVeteranはグループごとに独立したクールダウンを持ち、
-    同一グループ内での連続したVeteran昇格を防ぎます。
+    Emphasizes target prioritization, situational decision-making, and Nitra management
+    rather than relying solely on raw enemy counts.
+    Features custom enemies, Elite variants, events, and mission-specific gameplay adjustments.
 
-  想定敵数:
-    - ME0 : Haz5   x 1.5 程度
-    - ME1 : Haz6   x 1.5 程度
-    - ME2 : Haz5.5 x 2   程度
+  Public Lobby Notes:
+    - Balanced for public lobbies
+    - No client-side mods required
+    - Alert Swarms are the primary source of danger
+    - Prioritizing high-value targets is essential
+    - Nitra cost: 80
 
-    敵数は各Hazard 5+ Modifierレベル向けに調整されており、
-    難易度の主な変化要因はModifier側となるよう設計されています。
-
-  Hazard 5との平均パラメータ比較:
-    - Enemy Count Modifier         : 1.113 -> 1.58 (ME1: 1.89 / ME2: 2.36)
-    - Encounter Difficulty         :   337 -> 190
-    - Stationary Difficulty        :   158 -> 168  *1
-    - Enemy Wave Interval (Alert)  :  240s -> 241s
-    - Enemy Normal Wave Interval   :  161s -> 211s *2
-    - Enemy Normal Wave Difficulty :   400 -> 270  *2
-
-    *1 Stationary Enemyはより安定して出現するよう調整。
-       敵が配置されない抽選結果を廃止し、Enemy Count補正を考慮した
-       総合的な難易度はHazard 5に近い水準を維持。
-
-    *2 通常Waveは平均的に大幅削減されているため、
-       戦闘の主な難所はAlert Swarmとなる。
-
-       ただし稀に強力な通常Waveが発生する:
-         - 10%で約105秒間隔
-         - 5%でDifficulty約600
-
-  Note:
-    Aggressive Enemiesと組み合わせた場合、
-    敵の速度補正がHazard 7相当を超える場合があります。
-
-    敵が極めて攻撃的になり、バランスを超えた挙動を見せる場合があります。
-
-  Changes:
-  - 難易度全般
-    - Hazard 5+ All Modifierを付ける前提で作成しているが、無しでもプレイ可能
-    - ME0 / ME1 / ME2 個別に調整されたEnemyCountスケーリングとなるよう調整
-    - Haz5x2のような敵の密度をスウォームにフォーカスした難易度となるよう調整
-    - アラート以外の敵の数と間隔を下方修正 (Encounter、Stationary、Enemy Normal Wave)
-    - EnemyCountスケーリングによって想定以上に影響を受ける敵のスポーン数を再調整
-      - Crawler、Pit Jaw、Scrab
-  - イベント
-    - Gold Riskシステムを追加
-      - 一定量のゴールドを採掘するとイベントが発生 (Compressed Goldは対象外)
-      - 進捗50%、75%、90%で警告メッセージを表示
-      - イベント発生時に最終警告を表示
-      - 進捗75%到達後、Elite Ebonite Glyphid GruntによるMini Waveが定期的に発生
-      - 進捗100%到達時、Elite Glyphid Crassus Detonatorが出現
-    - RED ALERTシステムを追加
-      - Alert Swarmは低確率でRED ALERTへ昇格する
-      - RED ALERTの基本発生率は10%
-      - 通常Swarmが発生するたびに発生率が5%上昇し、最大20%まで増加
-      - RED ALERT発生時、発生率は10%にリセットされる
-      - RED ALERT発生時は専用警告メッセージが表示される
-      - RED ALERT中は通常のSwarmとは別に、元のSwarm規模の約25%に相当する追加Spawn Waveが発生する
-        - 試験的なRED ALERTバリエーション：Grunt、Mactera、Ranged、Exploder増援
-  - Stationary Enemy Changes
-    - Stationary Difficultyで空ロールを廃止
-      (Enemy Count補正込みの総難度は概ねHazard 5相当を維持しつつ、
-      平均難度を158→238へ増加)
-    - StationaryEnemyDiversityを 2–4 から 3–5 に増加
-    - Elite Cave Leechを追加
-      (触手速度40%低下、実HP25%増加、P4で約173EHP)
-    - Brood Nexusの調整
-      - Brood NexusからGlyphid Spawn以外のクリーチャーも出現するように変更
-        (放置されがちなため)
-      - 生成間隔を10秒から30秒に変更
-      - 死亡時のSpawn数を15から10に変更
-  - Elite & Custom Enemies
-    - SentinelをPraetorianと同程度のレートで追加
-    - Acid QueenをSpecial PoolにMenaceと同程度のレートで追加
-      (DamageMultiplier 5.5、実体力は545)
-    - エリートのダメージ抵抗のスケーリングを修正
-    - カスタムEliteグループ (LST、HVT、Special、Disruptive) を追加
-      - Eliteの出現頻度を制御するため、グループ毎のクールダウンを設定
-      - クールダウン毎に各グループから1体のみVeteranへ昇進可能
-    - Elite Septic Spreader を Ranged Special Elite Group に追加
-      (Red Sepsisの代わりに雪玉を発射、P4で480EHP、温度閾値2倍)
-    - Elite Stingtail を HVT Disruptive Elite Group に追加
-      (掴みクールダウン短縮、P4で480EHP、温度閾値1.5倍)
-    - Elite Warden を LST Disruptive Elite Group に追加
-      (バフ範囲1.5倍、スタン・恐怖無効、P4で1200EHP、温度閾値1.5倍)
-    - Mactera Fire Bomber を LST Disruptive Elite Group に追加
-      (Mactera Goo Bomberからのみ昇進)
-  - ミッション個別調整
-    - ミッション全般
-      - Extractionフェーズ中の敵数を増加 (Point Extractionの脱出カウントダウン中も含む)
-    - On-site Refining
-      - Refineryでパイプが壊れた際の敵の数を減少
-    - Salvage Operation
-      - Mini Muleの足スキャン時間を2秒から1秒に変更
-      - 修理の秒数をByPlayerCountに応じて10秒から10 / 20 / 30 / 40 秒に変更
-      - 修理に必要な足の数を2-5のランダムに設定
-      - MiniMule/Uplink/Refuelの協力インタラクト倍率をx5に設定
-      - SalvageのExtraction中、時間経過で敵数が増加
-        - Drop Pod起動時から敵数が増加し始める
-        - Drop Podのドアが開く頃には敵数がおよそ2倍になる
-        - 脱出完了まで敵数は増加し続ける
-    - Point Extraction
-      - Point Extractionの敵の数を減少
-    - Escort Duty
-      - Dorettaの大ダメージ判定のしきい値を削除
-      - Dorettaの大ダメージ耐性を0.5から0.75に減少
-  - その他
-    - ダウン時のサウンドを追加 (ランダム)
-    - Acid Queenのスポーングローバルサウンドを追加
-    - この難易度向けのSpace Rig Tipsを追加
-      - カスタム要素、敵、ゲームプレイ変更点に関する情報を表示
-    - QoL: 回収作戦中、防衛エリアのプレイヤーがいない場合のミッションコントロールのメッセージを無効
-    - QoL: 回収作戦中、ソロの場合、防衛エリアのプレイヤーがいない場合のペナルティを調整
-    - CD2専用: 独自エリートの名称を変更
-    - CD2専用: 一部の独自エリートの色を変更
-
-  Experimental Features:
-  - TODO
-
-  Future Plans:
-  - Acid Queenの最大湧き上限を設定
-  - ゴールド採掘システムの調整
-    - イベント内容、バランスの調整
-    - 鉱物をテーマとした特殊エンカウントの追加
-  - RED ALERTシステムの拡張
-    - RED ALERT専用の敵や特殊エンカウントの追加
-      - e.g. Enemy Mutations, more Elites, etc.
-    - イベント内容、バランスの調整
-  - ミッションのフェーズ毎の敵の数や制限
-    - Escortの固定と特殊枠の制限 (Fire Bomber、Scalebrambleとか)
-    - Drillevator用の敵プールを調整
-    - Egg Hunt、Elimination、Sabotageのバランス調整
-  - 新たなエリートの追加と出現率の調整
-    - バニラに存在しないエリートの追加
-    - 高Courage、LST、HVTへの対処の重要性を高める
-  - 固定敵の種類数と出現数を増加
-  - QoL要素の追加
-    - Salvageのバルクの地形破壊無効
-    - EliminationのDread Helperの実装
-  - 補給可能時の通知メッセージ追加 (将来的なNitraコスト変更への対応)
-
+  What's New v3:
+  - New Enemy Variants
+    Added Crawler, Elite Trawler, Elite Youngling, and Elite Patrol Bot.
+  - Expanded Enemy Group System
+    Added the Melee Special group and expanded the HVT Disruptive group to support the new Elite variants.
+  - Expanded Enemy Pools
+    Expanded Enemy Pool and Stationary Pool sizes to preserve encounter variety.
+  - Mission Event Improvements
+    Added a Bulk Detonator event for Dreadnought encounters, player-count scaling to Egg Waves, and Phase Bombs during Hack-C.
+  - Enemy Balance Improvements
+    Rebalanced various enemies, including Elite and custom variants, and adjusted spawn and temperature settings.
   ",
   "Vars": {
     "GoldEventAvailable": {
@@ -328,6 +196,24 @@
         "Then": true,
         "Else": false
       }
+    },
+    "DreadHelperType": {
+      "Type": "String",
+      "Value": {
+        "Mutate": "RandomChoicePerMission",
+        "Choices": [
+          "Tank",
+          "Hive",
+          "Twins",
+          "TankHive",
+          "TankTwins",
+          "HiveTwins",
+          "All"
+        ],
+        "Weights": [
+          9, 9, 9, 3, 3, 3, 3
+        ]
+      }
     }
   },
   "Caps": {
@@ -354,6 +240,19 @@
       "B": {
         "Mutate": "ByMissionType",
         "Default": 1,
+        "Egg": {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringEggAmbush",
+            "StartingAt": 5,
+            "StoppingAfter": 10
+          },
+          "Then": {
+            "Mutate": "ByPlayerCount",
+            "Values": [ 2.0, 2.0, 2.5, 3.0 ]
+          },
+          "Else": 1
+        },
         "PE": 0.667,
         "Refinery": {
           "Mutate": "ByRefineryPhase",
@@ -462,14 +361,14 @@
         "CoopUseMultiplier": 5
       },
       "DisableLeaveShout": true,
-      "LeavePenaltyMultiplier": [0.75, 1]
+      "LeavePenaltyMultiplier": [ 0.75, 1 ]
     },
     "Refuel": {
       "RepairUsable": {
         "CoopUseMultiplier": 5
       },
       "DisableLeaveShout": true,
-      "LeavePenaltyMultiplier": [0.75, 1]
+      "LeavePenaltyMultiplier": [ 0.75, 1 ]
     }
   },
   "EscortMule": {
@@ -479,11 +378,14 @@
     "NeutralDamageModifier": 0.1
   },
   "Pools": {
-    "MinPoolSize": 8,
-    "SpecialEnemies": {
-      "Add": [
-        "ED_Spider_ShooterQueen"
-      ]
+    "MinPoolSize": 10,
+    "DisruptiveEnemyPoolCount": {
+      "Min": 3,
+      "Max": 3
+    },
+    "StationaryEnemyCount": {
+      "Min": 5,
+      "Max": 5
     },
     "StationaryPool": {
       "Add": [
@@ -492,44 +394,58 @@
     },
     "EnemyPool": {
       "Add": [
-        "ED_Sentinel"
+        "ED_Sentinel",
+        "ED_Crawler_Normal"
       ]
     }
   },
   "EnemiesNoSync": {
-    "ED_EliteCooldown_LST_Disruptive": {
+    "ED_EnemyCooldown_LST_Disruptive": {
       "Base": "ED_InfestationLarva",
       "HealthRaw": 99999,
       "Heal": {
         "Mutate": "EnemyCooldown",
         "EDs": [
-          "ED_EliteCooldown_LST_Disruptive"
+          "ED_EnemyCooldown_LST_Disruptive"
         ],
         "CooldownTime": 1,
         "ValueDuringCooldown": 99999,
         "DefaultValue": -9999999
       }
     },
-    "ED_EliteCooldown_HVT_Disruptive": {
+    "ED_EnemyCooldown_HVT_Disruptive": {
       "Base": "ED_InfestationLarva",
       "HealthRaw": 99999,
       "Heal": {
         "Mutate": "EnemyCooldown",
         "EDs": [
-          "ED_EliteCooldown_HVT_Disruptive"
+          "ED_EnemyCooldown_HVT_Disruptive"
         ],
         "CooldownTime": 1,
         "ValueDuringCooldown": 99999,
         "DefaultValue": -9999999
       }
     },
-    "ED_EliteCooldown_Ranged_Special": {
+    "ED_EnemyCooldown_Melee_Special": {
       "Base": "ED_InfestationLarva",
       "HealthRaw": 99999,
       "Heal": {
         "Mutate": "EnemyCooldown",
         "EDs": [
-          "ED_EliteCooldown_Ranged_Special"
+          "ED_EnemyCooldown_Melee_Special"
+        ],
+        "CooldownTime": 1,
+        "ValueDuringCooldown": 99999,
+        "DefaultValue": -9999999
+      }
+    },
+    "ED_EnemyCooldown_Ranged_Special": {
+      "Base": "ED_InfestationLarva",
+      "HealthRaw": 99999,
+      "Heal": {
+        "Mutate": "EnemyCooldown",
+        "EDs": [
+          "ED_EnemyCooldown_Ranged_Special"
         ],
         "CooldownTime": 1,
         "ValueDuringCooldown": 99999,
@@ -566,21 +482,17 @@
         "ED_Bomber_Normal": 1,
         "ED_Bomber_Explosive": {
           "Mutate": "EnemyCooldown",
-          "EDs": [ "ED_EliteCooldown_LST_Disruptive" ],
+          "EDs": [ "ED_EnemyCooldown_LST_Disruptive" ],
           "CooldownTime": 80,
           "ValueDuringCooldown": 0,
           "DefaultValue": {
             "Mutate": "IfFloat",
             "Value": {
-              "Mutate": "Add",
-              "A": {
-                "Mutate": "EnemyCount",
-                "ED": "ED_Spider_Buffer_Elite"
-              },
-              "B": {
-                "Mutate": "EnemyCount",
-                "ED": "ED_Bomber_Explosive"
-              }
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Spider_Buffer_Elite",
+                "ED_Bomber_Explosive"
+              ]
             },
             ">=": 1,
             "Then": 0,
@@ -590,7 +502,11 @@
       }
     },
     "ED_Bomber_Normal": {
-      "Base": "ED_Bomber"
+      "Base": "ED_Bomber",
+      "Temperature": {
+        "FreezeTemperature": -250,
+        "WarmingRate": 40
+      }
     },
     "ED_Bomber_Explosive": {
       "CanBeUsedForConstantPressure": false,
@@ -600,9 +516,29 @@
       "MaxSpawnCount": 1,
       "Rarity": 8,
       "SpawnAmountModifier": 0.5,
+      "Temperature": {
+        "FreezeTemperature": -250,
+        "WarmingRate": 40
+      },
       "Spawner": {
-        "ED": "ED_EliteCooldown_LST_Disruptive",
+        "ED": "ED_EnemyCooldown_LST_Disruptive",
         "OnDeathCount": 1
+      }
+    },
+    "ED_Bomber_Ice": {
+      "Temperature": {
+        "FreezeTemperature": -375,
+        "WarmingRate": 60
+      }
+    },
+    "ED_Grabber": {
+      "Temperature": {
+        "FreezeTemperature": -150
+      }
+    },
+    "ED_CaveLeech": {
+      "CaveLeech": {
+        "MaxDropPlayerDuration": 10
       }
     },
     "ED_CaveLeech_Elite": {
@@ -617,8 +553,7 @@
         "TemperatureChangeScale": 1
       },
       "Resistances": {
-        "PiercingDamageMultiplier": 0.2,
-        "DamageMultiplier": 0.75
+        "DamageMultiplier": 0.6875
       },
       "CaveLeech": {
         "BiteDamage": 3,
@@ -635,6 +570,24 @@
     "ED_Crawler": {
       "MinSpawnCount": 0,
       "MaxSpawnCount": 1
+    },
+    "ED_Crawler_Normal": {
+      "DisplayName": "SARU",
+      "Base": "ED_Crawler",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 50,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 2,
+      "Rarity": 5,
+      "Temperature": {
+        "BurnTemperature": 35,
+        "DouseFireTemperature": 5,
+        "FreezeTemperature": -50,
+        "UnfreezeTemperature": 0,
+        "WarmingRate": 6,
+        "CoolingRate": 6
+      }
     },
     "ED_Ossiran_Scrab": {
       "CanBeUsedForConstantPressure": true,
@@ -658,6 +611,7 @@
       ]
     },
     "ED_Sentinel": {
+      "DisplayName": "O-Sentinel",
       "Base": "ED_Spider_Tank_HeavySpawn",
       "CanBeUsedForConstantPressure": false,
       "CanBeUsedInEncounters": false,
@@ -668,20 +622,64 @@
       "SpawnAmountModifier": 0.5,
       "SpawnSpread": 500
     },
+    "ED_Spider_RapidShooter": {
+      "Temperature": {
+        "FreezeTemperature": -100,
+        "UnfreezeTemperature": -50,
+        "WarmingRate": 10
+      }
+    },
+    "ED_Spider_Shooter": {
+      "CustomVeterans": {
+        "ED_Spider_Shooter_Normal": 9,
+        "ED_Spider_ShooterQueen": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EnemyCooldown_Ranged_Special" ],
+          "CooldownTime": 80,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Spider_ShooterQueen",
+                "ED_Spider_Lobber_Elite"
+              ]
+            },
+            ">=": 1,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Spider_Shooter_Normal": {
+      "Base": "ED_Spider_Shooter"
+    },
     "ED_Spider_ShooterQueen": {
+      "IsBossFight": true,
+      "Significance": "Critical",
       "CanBeUsedForConstantPressure": false,
       "CanBeUsedInEncounters": true,
       "DifficultyRating": 95,
       "MinSpawnCount": 1,
-      "MaxSpawnCount": 1,
+      "MaxSpawnCount": 0,
       "Rarity": 10,
       "SpawnAmountModifier": 0.5,
       "AttackDamageMultiplier": 0.4,
       "Resistances": {
-        "DamageMultiplier": 5.5
+        "DamageMultiplier": 5,
+        "PoisonDamageMultiplier": 0.2
+      },
+      "Spawner": {
+        "ED": "ED_EnemyCooldown_Ranged_Special",
+        "OnDeathCount": 1
       }
     },
     "ED_SpiderSpawner": {
+      "Temperature": {
+        "OnFireHeatRange": 250
+      },
       "Direct": {
         "Int:DeathSpawnCount": 10,
         "Float:Spawn Interval": 30
@@ -695,26 +693,50 @@
         "Escort": "ED_Spider_Grunt"
       }
     },
+    "ED_Spider_Swarmer": {
+      "MaxSpawnCount": 100,
+      "Temperature": {
+        "FreezeTemperature": -8
+      }
+    },
+    "ED_EggSpider": {
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 1
+    },
+    "ED_Spider_Tank": {
+      "Resistances": {
+        "PiercingDamageMultiplier": 1
+      }
+    },
+    "ED_Spider_Tank_Ice": {
+      "Resistances": {
+        "PiercingDamageMultiplier": 1
+      }
+    },
+    "ED_Spider_Tank_HeavySpawn": {
+      "SpawnSpread": 500
+    },
+    "ED_Spider_ShieldTank": {
+      "Resistances": {
+        "PiercingDamageMultiplier": 1
+      }
+    },
     "ED_Spider_Buffer": {
       "CustomVeterans": {
         "ED_Spider_Buffer_Normal": 1,
         "ED_Spider_Buffer_Elite": {
           "Mutate": "EnemyCooldown",
-          "EDs": [ "ED_EliteCooldown_LST_Disruptive" ],
+          "EDs": [ "ED_EnemyCooldown_LST_Disruptive" ],
           "CooldownTime": 80,
           "ValueDuringCooldown": 0,
           "DefaultValue": {
             "Mutate": "IfFloat",
             "Value": {
-              "Mutate": "Add",
-              "A": {
-                "Mutate": "EnemyCount",
-                "ED": "ED_Spider_Buffer_Elite"
-              },
-              "B": {
-                "Mutate": "EnemyCount",
-                "ED": "ED_Bomber_Explosive"
-              }
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Spider_Buffer_Elite",
+                "ED_Bomber_Explosive"
+              ]
             },
             ">=": 1,
             "Then": 0,
@@ -737,7 +759,7 @@
         "DamageMultiplier": 1.1
       },
       "Direct": {
-        "Float:EnemyBuffer.BuffRadius": 1350,
+        "Float:EnemyBuffer.BuffRadius": 1800,
         "Int:EnemyBuffer.MaxBuffedTargets": 10
       },
       "Temperature": {
@@ -749,7 +771,7 @@
         "WarmingRate": 12
       },
       "Spawner": {
-        "ED": "ED_EliteCooldown_LST_Disruptive",
+        "ED": "ED_EnemyCooldown_LST_Disruptive",
         "OnDeathCount": 1
       }
     },
@@ -758,17 +780,17 @@
         "ED_Spider_Lobber_Normal": 1,
         "ED_Spider_Lobber_Elite": {
           "Mutate": "EnemyCooldown",
-          "EDs": [ "ED_EliteCooldown_Ranged_Special" ],
+          "EDs": [ "ED_EnemyCooldown_Ranged_Special" ],
           "CooldownTime": 80,
           "ValueDuringCooldown": 0,
           "DefaultValue": {
             "Mutate": "IfFloat",
             "Value": {
-              "Mutate": "Add",
-              "A": {
-                "Mutate": "EnemyCount",
-                "ED": "ED_Spider_Lobber_Elite"
-              }
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Spider_ShooterQueen",
+                "ED_Spider_Lobber_Elite"
+              ]
             },
             ">=": 1,
             "Then": 0,
@@ -800,7 +822,7 @@
       },
       "StaggerDurationMultiplier": 2.5,
       "Spawner": {
-        "ED": "ED_EliteCooldown_Ranged_Special",
+        "ED": "ED_EnemyCooldown_Ranged_Special",
         "OnDeathCount": 1
       },
       "Materials": [
@@ -812,17 +834,17 @@
         "ED_Spider_Stinger_Normal": 1,
         "ED_Spider_Stinger_Elite": {
           "Mutate": "EnemyCooldown",
-          "EDs": [ "ED_EliteCooldown_HVT_Disruptive" ],
+          "EDs": [ "ED_EnemyCooldown_HVT_Disruptive" ],
           "CooldownTime": 80,
           "ValueDuringCooldown": 0,
           "DefaultValue": {
             "Mutate": "IfFloat",
             "Value": {
-              "Mutate": "Add",
-              "A": {
-                "Mutate": "EnemyCount",
-                "ED": "ED_Spider_Stinger_Elite"
-              }
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Spider_Stinger_Elite",
+                "ED_PatrolBot_Elite"
+              ]
             },
             ">=": 1,
             "Then": 0,
@@ -869,8 +891,244 @@
         "Float:SplineHookAttack.OnSuccessCooldown": 4
       },
       "Spawner": {
-        "ED": "ED_EliteCooldown_HVT_Disruptive",
+        "ED": "ED_EnemyCooldown_HVT_Disruptive",
         "OnDeathCount": 1
+      }
+    },
+    "ED_Shark": {
+      "CustomVeterans": {
+        "ED_Shark_Normal": 3,
+        "ED_Shark_Elite": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EnemyCooldown_Melee_Special" ],
+          "CooldownTime": 70,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Shark_Elite",
+                "ED_Woodlouse_Youngling_Elite"
+              ]
+            },
+            ">=": 2,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Shark_Normal": {
+      "Base": "ED_Shark"
+    },
+    "ED_Shark_Elite": {
+      "DisplayName": "Elite Nayaka Trawler",
+      "Base": "ED_Shark",
+      "Elite": true,
+      "ForceEliteBase": "ED_Mactera_TripleShooter",
+      "Resistances": {
+        "DamageMultiplier": 1.03125
+      },
+      "Direct": {
+        "Float:LaunchPower": 1500,
+        "Float:MinCirclingTime": 1,
+        "Float:MaxCirclingTime": 3,
+        "Float:JumpForce": 2250,
+        "Float:ChanceToGrab": 0.3,
+        "Float:GrabTime": 5,
+        "Float:AttackDuration": 12,
+        "Float:ChanceForJump": 0.6,
+        "Float:MinJumpCooldown": 1,
+        "Float:MaxJumpCooldown": 3
+      },
+      "Temperature": {
+        "BurnTemperature": 18,
+        "DouseFireTemperature": 0,
+        "CoolingRate": 10,
+        "FreezeTemperature": -20,
+        "UnfreezeTemperature": 0,
+        "WarmingRate": 20
+      },
+      "Materials": [
+        "M_Crawler_Inner_Mouith",
+        "M_CrawlerBone"
+      ],
+      "Spawner": {
+        "ED": "ED_EnemyCooldown_Melee_Special",
+        "OnDeathCount": 1
+      }
+    },
+    "ED_Shredder": {
+      "MaxSpawnCount": 20,
+      "Temperature": {
+        "FreezeTemperature": -60,
+        "UnfreezeTemperature": 999999,
+        "WarmingRate": 30
+      }
+    },
+    "ED_Terminator": {
+      "Temperature": {
+        "FreezeTemperature": -45,
+        "UnfreezeTemperature": 150,
+        "WarmingRate": 30,
+        "FozenDamageBonusScale": 3
+      }
+    },
+    "ED_Woodlouse_Youngling": {
+      "MinSpawnCount": 1,
+      "CustomVeterans": {
+        "ED_Woodlouse_Youngling_Normal": 3,
+        "ED_Woodlouse_Youngling_Elite": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EnemyCooldown_Melee_Special" ],
+          "CooldownTime": 70,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Shark_Elite",
+                "ED_Woodlouse_Youngling_Elite"
+              ]
+            },
+            ">=": 2,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Woodlouse_Youngling_Normal": {
+      "Base": "ED_Woodlouse_Youngling",
+      "Temperature": {
+        "BurnTemperature": 75,
+        "DouseFireTemperature": 35,
+        "CoolingRate": 7.5,
+        "FreezeTemperature": -90,
+        "UnfreezeTemperature": -45,
+        "WarmingRate": 7.5
+      }
+    },
+    "ED_Woodlouse_Youngling_Elite": {
+      "DisplayName": "Elite Q'ronar Youngling",
+      "Base": "ED_Woodlouse_Youngling",
+      "Elite": true,
+      "ForceEliteBase": "ED_Spider_Grunt_Attacker",
+      "Resistances": {
+        "DamageMultiplier": 0.55
+      },
+      "Temperature": {
+        "BurnTemperature": 15,
+        "DouseFireTemperature": 10.5,
+        "CoolingRate": 10,
+        "FreezeTemperature": -18,
+        "UnfreezeTemperature": -13.5,
+        "WarmingRate": 15
+      },
+      "Direct": {
+        "Float:FoldedStateMaxTime": 9999,
+        "Float:FoldedStateMinTime": 9999,
+        "Float:UnfoldedStateMaxTime": 0.1,
+        "Float:RefreshTimeMax": 0.1,
+        "Float:RefreshTimeMin": 0.1,
+        "Float:ForgetTime": 0.1,
+        "Float:ForgetRange": 10,
+        "Bool:LockToRollMode": true
+      },
+      "Materials": [
+        "", "M_WoodLouse_A_Flesh_Glow", "M_WoodLouse_A_Flesh", "M_WoodLouse_A_Fangs"
+      ],
+      "Spawner": {
+        "ED": "ED_EnemyCooldown_Melee_Special",
+        "OnDeathCount": 1
+      }
+    },
+    "ED_PatrolBot": {
+      "CustomVeterans": {
+        "ED_PatrolBot_Normal": 3,
+        "ED_PatrolBot_Elite": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EnemyCooldown_HVT_Disruptive" ],
+          "CooldownTime": 80,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [
+                "ED_Spider_Stinger_Elite",
+                "ED_PatrolBot_Elite"
+              ]
+            },
+            ">=": 1,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_PatrolBot_Normal": {
+      "Base": "ED_PatrolBot",
+      "Temperature": {
+        "FreezeTemperature": -60,
+        "UnfreezeTemperature": -4,
+        "FozenDamageBonusScale": 3
+      }
+    },
+    "ED_PatrolBot_Elite": {
+      "Base": "ED_PatrolBot",
+      "Elite": true,
+      "ForceEliteBase": "ED_Spider_Grunt_Attacker",
+      "DisplayName": "Elite Patrol Bot",
+      "IsBossFight": true,
+      "Resistances": {
+        "DamageMultiplier": 4.583333,
+        "FireDamageMultiplier": 1
+      },
+      "Temperature": {
+        "FreezeTemperature": -6,
+        "UnfreezeTemperature": -0.4,
+        "FozenDamageBonusScale": 3,
+        "BurnTemperature": 5,
+        "DouseFireTemperature": 0,
+        "CoolingRate": 20,
+        "WarmingRate": 40
+      },
+      "SpawnSpread": 5000,
+      "AttackDamageMultiplier": 0.6,
+      "Direct": {
+        "Float:DelayAfterLockOn": 5,
+        "Float:HackChance": 0,
+        "Float:SpawnRocketChance": 0,
+        "Float:MinRollingTime": 8,
+        "Float:MaxRollingTime": 10,
+        "Float:MinFlyingTime": 5,
+        "Float:MaxFlyingTime": 5,
+        "Float:SpawnRocketsTime": 0,
+        "Float:TurretLerpSpeed": 10.5,
+        "Float:MinTurretAngle": -40,
+        "Float:MaxTurretAngle": 180,
+        "Float:JumpForce": 1000,
+        "Float:RollingAttackCooldown": 0.05,
+        "Float:FlyingAttackCooldown": 9999,
+        "Float:GunRange": 7500,
+        "Float:AimDownwardsOffset": 5,
+        "Float:LowSpeedThreshold": 9999,
+        "Float:BumpDamage.Damage": 0,
+        "Float:ImpactCooldown.CoolDownTime": 9999
+      },
+      "Spawner": {
+        "ED": "ED_EnemyCooldown_HVT_Disruptive",
+        "OnDeathCount": 1
+      }
+    },
+    "ED_PatrolBot_Caretaker": {
+      "Temperature": {
+        "FreezeTemperature": -60,
+        "UnfreezeTemperature": -4,
+        "FozenDamageBonusScale": 3
       }
     },
     "ED_Greedy": {
@@ -883,13 +1141,17 @@
       "CanBeUsedInEncounters": false,
       "MaxSpawnCount": 1,
       "MinSpawnCount": 1,
+      "SpawnAmountModifier": 1,
       "Rarity": 1,
       "Resistances": {
         "CorrosiveDamageMultiplier": 0,
         "DamageMultiplier": 1.5,
         "ElectricDamageMultiplier": 0
       },
-      "SpawnAmountModifier": 1
+      "Outline": {
+        "Enabled": true,
+        "Type": "Enemy"
+      }
     },
     "ED_Greedy_Jr": {
       "DisplayName": "Greedy Jr",
@@ -899,9 +1161,50 @@
       "Resistances": {
         "DamageMultiplier": 1.928572
       },
+      "DropResource": {
+        "Enable": { "Var": "GoldEventAvailable" },
+        "Resource": "Gold",
+        "LaunchStrength": 1.5,
+        "Amount": {
+          "Mutate": "Multiply",
+          "A": { "Var": "GoldThreshold" },
+          "B": 0.01
+        }
+      },
+      "Goomba": {
+        "Enable": true
+      },
+      "Direct": {
+        "PCol:Sphere": true
+      },
       "Materials": [
         "M_Ossiran_Body_Copy", ""
       ]
+    },
+    "XED_DreadHelper": {
+      "Base": "ED_Spider_ExploderTank",
+      "MaxSpawnCount": 0,
+      "MinSpawnCount": 1,
+      "SpawnAmountModifier": 0.01,
+      "WeakpointHP": 300,
+      "Outline": {
+        "Enabled": true,
+        "Type": "Item"
+      },
+      "Resistances": {
+        "DamageMultiplier": 1
+      }
+    },
+    "XED_PhaseBombs": {
+      "Base": "ED_Terminator",
+      "DisplayName": "Phase Bombs",
+      "Heal": -9999999,
+      "HealthRaw": 1.0,
+      "Scale": 0,
+      "TimeDilation": 0,
+      "Direct": {
+        "PCol:Capsule": false
+      }
     }
   },
   "WaveSpawners": [
@@ -1153,6 +1456,167 @@
         "Then": 2500,
         "Else": 2000
       },
+      "Locations": 1
+    },
+    {
+      "Name": "TankDreadHelper",
+      "Enabled": {
+        "Mutate": "IfFloat",
+        "Value": {
+          "Mutate": "EnemyCount",
+          "ED": "XED_DreadHelper"
+        },
+        "<": 1,
+        "Then": {
+          "Mutate": "And",
+          "A": { "Mutate": "DuringDread" },
+          "B": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [ "ED_Spider_Tank_Boss" ]
+            },
+            ">": 0,
+            "Then": true,
+            "Else": false
+          },
+          "C": {
+            "Mutate": "Select",
+            "Select": {
+              "Var": "DreadHelperType"
+            },
+            "Default": false,
+            "Tank": true,
+            "TankHive": true,
+            "TankTwins": true,
+            "All": true
+          }
+        },
+        "Else": false
+      },
+      "Interval": 10,
+      "Enemies": [
+        "XED_DreadHelper"
+      ],
+      "Difficulty": 40,
+      "Distance": 1750,
+      "Locations": 1
+    },
+    {
+      "Name": "HiveDreadHelper",
+      "Enabled": {
+        "Mutate": "IfFloat",
+        "Value": {
+          "Mutate": "EnemyCount",
+          "ED": "XED_DreadHelper"
+        },
+        "<": 1,
+        "Then": {
+          "Mutate": "And",
+          "A": { "Mutate": "DuringDread" },
+          "B": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [ "ED_Spider_Boss_Heavy" ]
+            },
+            ">": 0,
+            "Then": true,
+            "Else": false
+          },
+          "C": {
+            "Mutate": "Select",
+            "Select": {
+              "Var": "DreadHelperType"
+            },
+            "Default": false,
+            "Hive": true,
+            "TankHive": true,
+            "HiveTwins": true,
+            "All": true
+          }
+        },
+        "Else": false
+      },
+      "Interval": 10,
+      "Enemies": [
+        "XED_DreadHelper"
+      ],
+      "Difficulty": 40,
+      "Distance": 1750,
+      "Locations": 1
+    },
+    {
+      "Name": "TwinsDreadHelper",
+      "Enabled": {
+        "Mutate": "IfFloat",
+        "Value": {
+          "Mutate": "EnemyCount",
+          "ED": "XED_DreadHelper"
+        },
+        "<": 1,
+        "Then": {
+          "Mutate": "And",
+          "A": { "Mutate": "DuringDread" },
+          "B": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "EDs": [ "ED_Spider_Boss_TwinA", "ED_Spider_Boss_TwinB" ]
+            },
+            ">": 0,
+            "Then": true,
+            "Else": false
+          },
+          "C": {
+            "Mutate": "Select",
+            "Select": {
+              "Var": "DreadHelperType"
+            },
+            "Default": false,
+            "Twins": true,
+            "TankTwins": true,
+            "HiveTwins": true,
+            "All": true
+          }
+        },
+        "Else": false
+      },
+      "Interval": 10,
+      "Enemies": [
+        "XED_DreadHelper"
+      ],
+      "Difficulty": 40,
+      "Distance": 1750,
+      "Locations": 1
+    },
+    {
+      "Name": "Salvage Sentinel pressure",
+      "Enabled": {
+        "Mutate": "DuringDefend"
+      },
+      "SpawnOnEnable": true,
+      "Interval": 60,
+      "Enemies": [
+        "ED_Sentinel"
+      ],
+      "Difficulty": 8,
+      "Distance": 2000,
+      "Locations": 1
+    },
+    {
+      "Name": "Hacking Phase Bombs",
+      "Enabled": {
+        "Mutate": "BySaboPhase",
+        "Default": false,
+        "Hacking": true
+      },
+      "Enemies": [
+        "XED_PhaseBombs"
+      ],
+      "Difficulty": 1,
+      "Interval": 45,
+      "Distance": 10,
       "Locations": 1
     }
   ],
@@ -1495,6 +1959,33 @@
     },
     {
       "Send": {
+        "Mutate": "And",
+        "A": {
+          "Mutate": "DuringMission",
+          "StartingAt": 20
+        },
+        "B": {
+          "Mutate": "ByMissionType",
+          "Default": false,
+          "Egg": true,
+          "Elimination": true,
+          "Sabotage": true,
+          "Salvage": true
+        }
+      },
+      "Sender": {
+        "Mutate": "ByMissionType",
+        "Default": "",
+        "Egg"        : "[RAP] Non-Swarm Eggs spawn larger enemy groups.",
+        "Elimination": "[RAP] Dreadnought battles may attract additional threats.",
+        "Sabotage"   : "[RAP] Stationary enemies may appear. Phase Bombs occur during Hack-C.",
+        "Salvage"    : "[RAP] Count Mini-Mule legs. Teamwork speeds up repairs."
+      },
+      "Type": "Developer",
+      "Message": ""
+    },
+    {
+      "Send": {
         "Mutate": "If",
         "Condition": {
           "Mutate": "And",
@@ -1522,23 +2013,26 @@
       "Sender": {
         "Mutate": "RandomChoice",
         "Choices": [
-          "[TIP] Major threats arrive with the Swarm.",
-          "[TIP] Preparation matters more than you think.",
-          "[TIP] Leave no Nitra behind.",
-          "[TIP] The journey home can be the deadliest part.",
-          "[TIP] Salvage extraction gets harder over time.",
-          "[TIP] Don't expect every cave to be empty.",
-          "[TIP] Some enemies may transform into Elites.",
-          "[TIP] Don't let half-dead Acid Queens escape.",
-          "[TIP] Hear webs? Find the Acid Queen.",
-          "[TIP] Some Cave Leeches are quieter than they look.",
-          "[TIP] Nexuses explode. This is not a joke.",
-          "[TIP] Elite Spreaders prefer frost over poison.",
-          "[TIP] Mining Gold may attract unwanted attention.",
-          "[TIP] Elite Ebonite Grunts fall in two pickaxe hits.",
-          "[TIP] Any Swarm can escalate into a RED ALERT.",
-          "[TIP] Count Mini-Mule legs first.",
-          "[TIP] Multiple dwarves can repair Mini-Mules faster."
+          "[RAP] Major threats arrive with the Swarm.",
+          "[RAP] Every phase brings more enemies than you'd expect.",
+          "[RAP] Leave no Nitra behind.",
+          "[RAP] The journey home can be the deadliest part.",
+          "[RAP] Salvage extraction gets harder over time.",
+          "[RAP] Don't expect every cave to be empty.",
+          "[RAP] Some enemies may transform into Elites.",
+          "[RAP] Don't let half-dead Acid Queens escape.",
+          "[RAP] Hear webs? Find the Acid Queen.",
+          "[RAP] Some Cave Leeches are quieter than they look.",
+          "[RAP] Nexuses explode. This is not a joke.",
+          "[RAP] Elite Spreaders prefer frost over poison.",
+          "[RAP] Mining Gold may attract unwanted attention.",
+          "[RAP] Elite Ebonite Grunts fall in 2 pickaxe hits, or 1 stomp.",
+          "[RAP] Any Swarm can escalate into a RED ALERT.",
+          "[RAP] Count Mini-Mule legs first.",
+          "[RAP] Multiple dwarves can repair Mini-Mules faster.",
+          "[RAP] Dreadnoughts may call for help.",
+          "[RAP] Egg waves may be larger than you expect.",
+          "[RAP] Phase Bombs occur during Hack-C."
         ]
       },
       "Type": "Developer",
@@ -1589,6 +2083,17 @@
         "Else": false
       },
       "Cue": "/Game/Audio/SFX/Environment/Pumpkin/Pumpkin_EvilLaughter_01_Cue.Pumpkin_EvilLaughter_01_Cue"
+    },
+    {
+      "Play": {
+        "Mutate": "TriggerOnChange",
+        "RiseOnly": true,
+        "Value": {
+          "Mutate": "EnemyCount",
+          "ED": "XED_DreadHelper"
+        }
+      },
+      "Cue": "/Game/Audio/SFX/Enemies/HeavyBoss/HeavyBoss_Scream_Cue.HeavyBoss_Scream_Cue"
     }
   ]
 }
