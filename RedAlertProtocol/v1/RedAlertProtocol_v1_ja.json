@@ -1,0 +1,675 @@
+{
+  "Name": "Red Alert Protocol v1 ja",
+  "Description": "
+
+  !! Host requires CD2 update 18 or newer !!
+
+  Concept:
+    Hazard 5+ 全Modifiers適用環境を基準に設計した、Haz5.5x2風の難易度プリセット。
+    難易度のピークをAlert Swarmにフォーカスさせ
+    大規模戦闘以外の時間帯は意図的に圧力を抑えている。
+    Hazard 5のゲームテンポと各種パラメータをベースに調整。
+    独自の敵、Eliteバリエーション、およびミッション固有のゲームプレイ調整を導入しつつ、
+    野良ロビーでも遊べるよう設計。
+
+  想定敵数:
+    - ME0 : Haz5   x 1.5 程度
+    - ME1 : Haz6   x 1.5 程度
+    - ME2 : Haz5.5 x 2   程度
+
+    敵数は各Hazard 5+ Modifierレベル向けに調整されており、
+    難易度の主な変化要因はModifier側となるよう設計されています。
+
+  公開ロビー向け:
+    - 公開ロビー向けにバランス調整 (クライアント側のMOD導入不要)
+    - Alert Swarmが主な脅威
+    - 個人のキャリー能力ではなく、チームとの連携を重視して設計
+    - 危険敵・大型敵の優先処理が重要
+    - ナイトラ80設定
+    - 極端な難易度スパイクを抑え、立て直し可能な難易度を重視
+
+  Hazard 5との平均パラメータ比較:
+    - Enemy Count Modifier         : 1.113 -> 1.58 (ME1: 1.89 / ME2: 2.36)
+    - Encounter Difficulty         :   337 -> 190
+    - Stationary Difficulty        :   158 -> 168  *1
+    - Enemy Wave Interval (Alert)  :  240s -> 241s
+    - Enemy Normal Wave Interval   :  161s -> 211s *2
+    - Enemy Normal Wave Difficulty :   400 -> 270  *2
+
+    *1 Stationary Enemyはより安定して出現するよう調整。
+       敵が配置されない抽選結果を廃止し、Enemy Count補正を考慮した
+       総合的な難易度はHazard 5に近い水準を維持。
+
+    *2 通常Waveは平均的に大幅削減されているため、
+       戦闘の主な難所はAlert Swarmとなる。
+
+       ただし稀に強力な通常Waveが発生する:
+         - 10%で約105秒間隔
+         - 5%でDifficulty約600
+
+  Note:
+    Aggressive Enemiesと組み合わせた場合、
+    敵の速度補正がHazard 7相当を超える場合があります。
+
+    敵が極めて攻撃的になり、バランスを超えた挙動を見せる場合があります。
+
+  Changes:
+  - Hazard 5+ All Modifierを付ける前提で作成しているが、無しでもプレイ可能
+  - ME0 / ME1 / ME2 個別に調整されたEnemyCountスケーリングとなるよう調整
+  - Haz5x2のような敵の密度をスウォームにフォーカスした難易度となるよう調整
+  - アラート以外の敵の数と間隔を下方修正（Encounter、Stationary、Enemy Normal Wave）
+  - Refineryでパイプが壊れた際の敵の数を減少
+  - Point Extractionの敵の数を減少
+  - Extractionフェーズ中の敵数を増加（Point Extractionの脱出カウントダウン中も含む）
+  - SalvageのExtraction中、時間経過で敵数が増加
+  - Crawlerの出現数を調整
+  - Pit JawとScrabの出現数を調整
+  - Stationary Enemy Changes
+    - Stationary Difficultyで空ロールを廃止
+      (Enemy Count補正込みの総難度は概ねHazard 5相当を維持しつつ、
+      平均難度を158→238へ増加)
+    - StationaryEnemyDiversityを 2–4 から 3–5 に増加
+    - Elite Cave Leechを追加
+      (触手速度40%低下、実HP25%増加、P4で約173EHP)
+    - Brood NexusからGlyphid Spawn以外のクリーチャーも出現するように変更
+      （放置されがちなため）
+  - Elite / Custom Enemy Changes
+    - SentinelをPraetorianと同程度のレートで追加
+    - Acid QueenをSpecial PoolにMenaceと同程度のレートで追加
+      (DamageMultiplier 5.5、実体力は545)
+    - エリートのダメージ抵抗のスケーリングを修正
+    - カスタムEliteグループ（LST、HVT、Special、Disruptive）を追加
+      - Eliteの出現頻度を制御するため、グループ毎のクールダウンを設定
+      - クールダウン毎に各グループから1体のみVeteranへ昇進可能
+    - Elite Septic Spreader を Ranged Special Elite Group に追加
+      (Red Sepsisの代わりに雪玉を発射、P4で480EHP、温度閾値2倍)
+    - Elite Stingtail を HVT Disruptive Elite Group に追加
+      (掴みクールダウン短縮、P4で480EHP、温度閾値1.5倍)
+    - Elite Warden を LST Disruptive Elite Group に追加
+      (バフ範囲1.5倍、スタン・恐怖無効、P4で1200EHP、温度閾値1.5倍)
+    - Mactera Fire Bomber を LST Disruptive Elite Group に追加
+      (Mactera Goo Bomberからのみ昇進)
+  - Escort Changes
+    - Dorettaの大ダメージ判定のしきい値を削除
+    - Dorettaの大ダメージ耐性を0.5から0.75に減少
+  - Salvage Changes
+    - Mini Muleの足スキャン時間を2秒から1秒に変更
+    - 修理の秒数をByPlayerCountに応じて10秒から10 / 20 / 30 / 40 秒に変更
+    - 修理に必要な足の数を2-5のランダムに設定
+    - MiniMule/Uplink/Refuelの協力インタラクト倍率をx5に設定
+  - ダウン時のサウンドを追加 (ランダム)
+  - Acid Queenのスポーングローバルサウンドを追加
+  - QoL: 回収作戦中、防衛エリアのプレイヤーがいない場合のミッションコントロールのメッセージを無効
+  - QoL: 回収作戦中、ソロの場合、防衛エリアのプレイヤーがいない場合のペナルティを調整
+  - CD2専用: 独自エリートの名称を変更
+  - CD2専用: 一部の独自エリートの色を変更
+
+  Experimental Features:
+  - TODO
+
+  Future Plans:
+  - Acid Queenの最大湧き上限を設定
+  - ミッションのフェーズ毎の敵の数や制限
+    - Escortの固定と特殊枠の制限 (Fire Bomber、Scalebrambleとか)
+  - 新たなエリートの追加と出現率の調整
+    - バニラに存在しないエリートの追加
+    - 高Courage、LST、HVTへの対処の重要性を高める
+  - 特殊Swarmの追加
+  - 固定敵の種類数と出現数を増加
+  - QoL要素の追加
+    - Salvageのバルクの地形破壊無効
+    - EliminationのDread Helperの実装
+  - ゴールド採掘に関連する追加システム
+    (一定量のゴールドを採掘すると、ペナルティイベントが発生する)
+  - 難易度ガイダンスの改善
+    - この難易度を初めて遊ぶプレイヤー向けのTips表示
+  - 補給可能時の通知メッセージ追加 (将来的なNitraコスト変更への対応)
+
+  ",
+  "Caps": {
+    "MaxActiveSwarmers": [ 90, 120, 180 ],
+    "MaxActiveEnemies" : [ 90, 120, 180 ]
+  },
+  "Resupply": {
+    "Cost": 80
+  },
+  "DifficultySetting": {
+    "BaseHazard": "Hazard 5",
+    "ExtraLargeEnemyDamageResistance":  [ 0.75, 0.8, 1.2, 1.7  ],
+    "ExtraLargeEnemyDamageResistanceB": [ 0.7 , 0.7, 1  , 1.3  ],
+    "ExtraLargeEnemyDamageResistanceC": [ 0.6 , 0.7, 1  , 1.6  ],
+    "ExtraLargeEnemyDamageResistanceD": [ 1.3 , 1.3, 1.5, 1.65 ],
+    "EnemyDamageResistance":            [ 1.2 , 1.2, 1.4, 1.5  ],
+    "EnemyDamageModifier":              [ 2.8 , 3  , 3.2, 3.4  ],
+    "EnemyCountModifier": {
+      "Mutate": "Multiply",
+      "A": {
+        "Mutate": "ByPlayerCount",
+        "Values": [ 1.2, 1.275, 1.725, 2.1 ]
+      },
+      "B": {
+        "Mutate": "ByMissionType",
+        "Default": 1,
+        "PE": 0.667,
+        "Refinery": {
+          "Mutate": "ByRefineryPhase",
+          "Default": 1,
+          "RefiningStalled": 0.667
+        }
+      },
+      "C": {
+        "Mutate": "If",
+        "Condition": {
+          "Mutate": "Or",
+          "A": { "Mutate": "DuringExtraction"  },
+          "B": { "Mutate": "DuringPECountdown" }
+        },
+        "Then": {
+          "Mutate": "ByMissionType",
+          "Default": 1.2,
+          "PE": 1.8,
+          "Salvage": {
+            "Mutate": "Add",
+            "A": {
+              "Mutate": "Multiply",
+              "A": {
+                "Mutate": "ElapsedExtraction"
+              },
+              "B": 0.01
+            },
+            "B": 0.1
+          }
+        },
+        "Else": 1
+      }
+    },
+    "EncounterDifficulty": [
+      { "weight": 3.0, "min":  50, "max": 150 },
+      { "weight": 6.0, "min": 150, "max": 250 },
+      { "weight": 1.0, "min": 350, "max": 450 }
+    ],
+    "StationaryDifficulty": [
+      { "weight": 1.0, "min": 100, "max": 150 },
+      { "weight": 1.0, "min": 175, "max": 250 }
+    ],
+    "EnemyWaveInterval": [
+      { "weight": 1.0, "min": 125, "max": 165 },
+      { "weight": 2.0, "min": 230, "max": 280 },
+      { "weight": 2.0, "min": 250, "max": 300 }
+    ],
+    "EnemyNormalWaveInterval": [
+      { "weight": 6.0, "min": 220, "max": 260 },
+      { "weight": 3.0, "min": 180, "max": 200 },
+      { "weight": 1.0, "min":  90, "max": 120 }
+    ],
+    "EnemyNormalWaveDifficulty": [
+      { "weight": 7.0, "min": 150, "max": 250 },
+      { "weight": 2.5, "min": 350, "max": 450 },
+      { "weight": 0.5, "min": 550, "max": 650 }
+    ],
+    "EnemyDiversity": [
+      { "weight": 2, "min": 1, "max": 2 },
+      { "weight": 8, "min": 3, "max": 4 },
+      { "weight": 1, "min": 5, "max": 6 }
+    ],
+    "StationaryEnemyDiversity": [
+      { "weight": 1, "min": 3, "max": 5 }
+    ],
+    "VeteranNormal": [
+      { "weight": 3  , "min": 0   , "max": 0   },
+      { "weight": 9  , "min": 0.15, "max": 0.3 },
+      { "weight": 2  , "min": 0.4 , "max": 0.6 },
+      { "weight": 0.5, "min": 1   , "max": 1   }
+    ],
+    "VeteranLarge": [
+      { "weight": 1, "min": 0.175, "max": 0.175 }
+    ],
+    "EnvironmentalDamageModifier": 1.1,
+    "PointExtractionScalar": 1.1,
+    "FriendlyFireModifier": 0.7,
+    "WaveStartDelayScale": 0,
+    "SpeedModifier": 1.15,
+    "AttackCooldownModifier": 1.5,
+    "ProjectileSpeedModifier": 1.7,
+    "HealthRegenerationMax": 0.1,
+    "ReviveHealthRatio": 0.1
+  },
+  "Salvage": {
+    "MiniMules": {
+      "ScanUsable": {
+        "UseDuration": 1
+      },
+      "RepairUsable": {
+        "UseDuration": {
+          "Mutate": "ByPlayerCount",
+          "Values": [ 10, 20, 30, 40 ]
+        },
+        "CoopUseMultiplier": 5
+      },
+      "LegsRequired": {
+        "Mutate": "RandomChoice",
+        "Choices": [ 2, 3, 4, 5 ],
+        "Weights": [ 2, 3, 3, 2 ]
+      },
+      "LegsPerMule": 6
+    },
+    "Uplink": {
+      "RepairUsable": {
+        "CoopUseMultiplier": 5
+      },
+      "DisableLeaveShout": true,
+      "LeavePenaltyMultiplier": [0.75, 1]
+    },
+    "Refuel": {
+      "RepairUsable": {
+        "CoopUseMultiplier": 5
+      },
+      "DisableLeaveShout": true,
+      "LeavePenaltyMultiplier": [0.75, 1]
+    }
+  },
+  "EscortMule": {
+    "FriendlyFireModifier": 0.1,
+    "BigHitDamageModifier": 0.75,
+    "BigHitDamageReductionThreshold": 0,
+    "NeutralDamageModifier": 0.1
+  },
+  "Pools": {
+    "MinPoolSize": 8,
+    "SpecialEnemies": {
+      "Add": [
+        "ED_Spider_ShooterQueen"
+      ]
+    },
+    "StationaryPool": {
+      "Add": [
+        "ED_CaveLeech_Elite"
+      ]
+    },
+    "EnemyPool": {
+      "Add": [
+        "ED_Sentinel"
+      ]
+    }
+  },
+  "EnemiesNoSync": {
+    "ED_EliteCooldown_LST_Disruptive": {
+      "Base": "ED_InfestationLarva",
+      "HealthRaw": 99999,
+      "Heal": {
+        "Mutate": "EnemyCooldown",
+        "EDs": [
+          "ED_EliteCooldown_LST_Disruptive"
+        ],
+        "CooldownTime": 1,
+        "ValueDuringCooldown": 99999,
+        "DefaultValue": -9999999
+      }
+    },
+    "ED_EliteCooldown_HVT_Disruptive": {
+      "Base": "ED_InfestationLarva",
+      "HealthRaw": 99999,
+      "Heal": {
+        "Mutate": "EnemyCooldown",
+        "EDs": [
+          "ED_EliteCooldown_HVT_Disruptive"
+        ],
+        "CooldownTime": 1,
+        "ValueDuringCooldown": 99999,
+        "DefaultValue": -9999999
+      }
+    },
+    "ED_EliteCooldown_Ranged_Special": {
+      "Base": "ED_InfestationLarva",
+      "HealthRaw": 99999,
+      "Heal": {
+        "Mutate": "EnemyCooldown",
+        "EDs": [
+          "ED_EliteCooldown_Ranged_Special"
+        ],
+        "CooldownTime": 1,
+        "ValueDuringCooldown": 99999,
+        "DefaultValue": -9999999
+      }
+    },
+    "ED_Bomber": {
+      "CustomVeterans": {
+        "ED_Bomber_Normal": 1,
+        "ED_Bomber_Explosive": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EliteCooldown_LST_Disruptive" ],
+          "CooldownTime": 80,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "Add",
+              "A": {
+                "Mutate": "EnemyCount",
+                "ED": "ED_Spider_Buffer_Elite"
+              },
+              "B": {
+                "Mutate": "EnemyCount",
+                "ED": "ED_Bomber_Explosive"
+              }
+            },
+            ">=": 1,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Bomber_Normal": {
+      "Base": "ED_Bomber"
+    },
+    "ED_Bomber_Explosive": {
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 95,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 1,
+      "Rarity": 8,
+      "SpawnAmountModifier": 0.5,
+      "Spawner": {
+        "ED": "ED_EliteCooldown_LST_Disruptive",
+        "OnDeathCount": 1
+      }
+    },
+    "ED_CaveLeech_Elite": {
+      "Base": "ED_CaveLeech",
+      "ForceEliteBase": "ED_Grabber",
+      "DisplayName": "Eleeeeeeeech",
+      "Rarity": 2,
+      "SpawnAmountModifier": 0.08,
+      "MaxSpawnCount": 2,
+      "Elite": true,
+      "Temperature": {
+        "TemperatureChangeScale": 1
+      },
+      "Resistances": {
+        "PiercingDamageMultiplier": 0.2,
+        "DamageMultiplier": 0.75
+      },
+      "CaveLeech": {
+        "BiteDamage": 3,
+        "MaxDistanceXY": 3200,
+        "GrapDelay": 0.16666,
+        "TentacleSpeed": 360,
+        "TentacleRetractSpeed": 660,
+        "TentaclePullSpeed": 1200,
+        "TentacleDropPlayerSpeed": 900,
+        "MaxDropPlayerDuration": 10,
+        "Silent": true
+      }
+    },
+    "ED_Crawler": {
+      "MinSpawnCount": 0,
+      "MaxSpawnCount": 1
+    },
+    "ED_Ossiran_Scrab": {
+      "CanBeUsedForConstantPressure": true,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 12,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 20,
+      "Rarity": 4,
+      "SpawnAmountModifier": 0.5
+    },
+    "ED_PitJaw": {
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 100,
+      "MinSpawnCount": 0,
+      "MaxSpawnCount": 1,
+      "Rarity": 1,
+      "SpawnAmountModifier": 0.5,
+      "Materials": [
+        "", "M_Compressed_Gold", ""
+      ]
+    },
+    "ED_Sentinel": {
+      "Base": "ED_Spider_Tank_HeavySpawn",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": false,
+      "DifficultyRating": 90,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 4,
+      "Rarity": 3,
+      "SpawnAmountModifier": 0.5,
+      "SpawnSpread": 500
+    },
+    "ED_Spider_ShooterQueen": {
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 95,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 1,
+      "Rarity": 10,
+      "SpawnAmountModifier": 0.5,
+      "AttackDamageMultiplier": 0.4,
+      "Resistances": {
+        "DamageMultiplier": 5.5
+      }
+    },
+    "ED_Spider_Spawn": {
+      "SpawnSpread": 350,
+      "CustomVeterans": {
+        "Mutate": "ByDNA",
+        "Default": "ED_Spider_Exploder",
+        "Escort": "ED_Spider_Grunt"
+      }
+    },
+    "ED_Spider_Buffer": {
+      "CustomVeterans": {
+        "ED_Spider_Buffer_Normal": 1,
+        "ED_Spider_Buffer_Elite": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EliteCooldown_LST_Disruptive" ],
+          "CooldownTime": 80,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "Add",
+              "A": {
+                "Mutate": "EnemyCount",
+                "ED": "ED_Spider_Buffer_Elite"
+              },
+              "B": {
+                "Mutate": "EnemyCount",
+                "ED": "ED_Bomber_Explosive"
+              }
+            },
+            ">=": 1,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Spider_Buffer_Normal": {
+      "Base": "ED_Spider_Buffer"
+    },
+    "ED_Spider_Buffer_Elite": {
+      "DisplayName": "Elite Glyphid Warden",
+      "Base": "ED_Spider_Buffer",
+      "Elite": true,
+      "ForceEliteBase": "ED_Mactera_TripleShooter",
+      "StaggerDurationMultiplier": 0,
+      "Courage": 1,
+      "Resistances": {
+        "DamageMultiplier": 1.1
+      },
+      "Direct": {
+        "Float:EnemyBuffer.BuffRadius": 1350,
+        "Int:EnemyBuffer.MaxBuffedTargets": 10
+      },
+      "Temperature": {
+        "BurnTemperature": 15,
+        "DouseFireTemperature": 7.5,
+        "FreezeTemperature": -21,
+        "UnfreezeTemperature": -9,
+        "CoolingRate": 6,
+        "WarmingRate": 12
+      },
+      "Spawner": {
+        "ED": "ED_EliteCooldown_LST_Disruptive",
+        "OnDeathCount": 1
+      }
+    },
+    "ED_Spider_Lobber": {
+      "CustomVeterans": {
+        "ED_Spider_Lobber_Normal": 1,
+        "ED_Spider_Lobber_Elite": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EliteCooldown_Ranged_Special" ],
+          "CooldownTime": 80,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "Add",
+              "A": {
+                "Mutate": "EnemyCount",
+                "ED": "ED_Spider_Lobber_Elite"
+              }
+            },
+            ">=": 1,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Spider_Lobber_Normal": {
+      "Base": "ED_Spider_Lobber"
+    },
+    "ED_Spider_Lobber_Elite": {
+      "DisplayName": "Elite Glyphid Septic Spreader",
+      "Base": "ED_Spider_Lobber",
+      "Elite": true,
+      "ForceEliteBase": "ED_Spider_ExploderTank",
+      "Projectile": "PRJ_Crye_SnowBall_C",
+      "Resistances": {
+        "DamageMultiplier": 0.928125,
+        "FireDamageMultiplier": 1.2
+      },
+      "Temperature": {
+        "BurnTemperature": 70,
+        "DouseFireTemperature": 10,
+        "FreezeTemperature": -100,
+        "UnfreezeTemperature": 0,
+        "CoolingRate": 6,
+        "WarmingRate": 12
+      },
+      "StaggerDurationMultiplier": 2.5,
+      "Spawner": {
+        "ED": "ED_EliteCooldown_Ranged_Special",
+        "OnDeathCount": 1
+      },
+      "Materials": [
+        "M_Flier_BomberIce_BombSacks", "M_Flier_BomberIce_BombSacks", "M_Flier_BomberIce_Flesh", "M_Flier_BomberIce_BombSacks"
+      ]
+    },
+    "ED_Spider_Stinger": {
+      "CustomVeterans": {
+        "ED_Spider_Stinger_Normal": 1,
+        "ED_Spider_Stinger_Elite": {
+          "Mutate": "EnemyCooldown",
+          "EDs": [ "ED_EliteCooldown_HVT_Disruptive" ],
+          "CooldownTime": 80,
+          "ValueDuringCooldown": 0,
+          "DefaultValue": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "Add",
+              "A": {
+                "Mutate": "EnemyCount",
+                "ED": "ED_Spider_Stinger_Elite"
+              }
+            },
+            ">=": 1,
+            "Then": 0,
+            "Else": 1
+          }
+        }
+      }
+    },
+    "ED_Spider_Stinger_Normal": {
+      "Base": "ED_Spider_Stinger"
+    },
+    "ED_Spider_Stinger_Elite": {
+      "DisplayName": "Elite Glyphid Stingtail",
+      "Base": "ED_Spider_Stinger",
+      "Elite": true,
+      "ForceEliteBase": "ED_Spider_Grunt_Attacker",
+      "AttackDamageMultiplier": 1.3,
+      "Resistances": {
+        "DamageMultiplier": 1.333333,
+        "FireDamageMultiplier": 1.428571
+      },
+      "Temperature": {
+        "BurnTemperature": 75,
+        "DouseFireTemperature": 40,
+        "FreezeTemperature": -100,
+        "UnfreezeTemperature": -30,
+        "CoolingRate": 7,
+        "WarmingRate": 10.5,
+        "TemperatureChangeScale": 0.6666
+      },
+      "Courage": 1,
+      "StaggerDurationMultiplier": 1.666667,
+      "StaggerImmunityWindow": 0.2,
+      "Direct": {
+        "Float:SplineHookAttack.ForwardPlacement": 100,
+        "Float:SplineHookAttack.DesiredLaunchAngle": 45,
+        "Float:SplineHookAttack.MaxAngle": 60,
+        "Float:SplineHookAttack.MaxAngledForce": 1800,
+        "Float:SplineHookAttack.AdjustmentStartDistance": 100,
+        "Float:SplineHookAttack.AttackDuration": 0.625,
+        "Float:SplineHookAttack.AttackDelay": 1.2,
+        "Float:SplineHookAttack.AquireLocationTime": 0.9,
+        "Float:SplineHookAttack.LeadMultiplier": 0.75,
+        "Float:SplineHookAttack.OnSuccessCooldown": 4
+      },
+      "Spawner": {
+        "ED": "ED_EliteCooldown_HVT_Disruptive",
+        "OnDeathCount": 1
+      }
+    }
+  },
+  "SoundCues": [
+    {
+      "Play": {
+        "Mutate": "TriggerOnChange",
+        "RiseOnly": true,
+        "Value": {
+          "Mutate": "DwarvesDown"
+        }
+      },
+      "Cue": {
+        "Mutate": "RandomChoice",
+        "Choices": [
+          "/Game/Audio/Characters/Voices/Dwarves/Dwarf_01/Misc/Dwarf_BeingLeftBehind_Javiere_16_Cue.Dwarf_BeingLeftBehind_Javiere_16_Cue",
+          "/Game/Audio/Characters/Voices/Dwarves/Dwarf_01/Misc/Dwarf_BeingLeftBehind_Javiere_16a_Cue.Dwarf_BeingLeftBehind_Javiere_16a_Cue",
+          "/Game/Audio/Characters/Voices/Dwarves/Dwarf_01/Misc/Dwarf_Misc_04_fart_Javiere_Cue.Dwarf_Misc_04_fart_Javiere_Cue"
+        ],
+        "Weights": [
+          45, 45, 10
+        ]
+      }
+    },
+    {
+      "Play": {
+        "Mutate": "TriggerOnChange",
+        "RiseOnly": true,
+        "Value": {
+          "Mutate": "EnemyCount",
+          "ED": "ED_Spider_ShooterQueen"
+        }
+      },
+      "Cue": "/Game/Audio/SFX/Environment/StickyWeb_Trigger_Cue.StickyWeb_Trigger_Cue"
+    }
+  ]
+}
