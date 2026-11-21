@@ -14,13 +14,11 @@ For the difficulty concept, features, requirements, and changes, refer to the do
 
 ## Version History
 
-| Version | Concept                           | Files           |
-| ------- | --------------------------------- | --------------- |
-| v1      | Base difficulty                   | [Browse](./v1/) |
-| v2      | Custom events update              | [Browse](./v2/) |
-| v3      | Gameplay expansion                | [Browse](./v3/) |
-| v4      | Combat Expansion                  | [Browse](./v4/) |
-| v5      | Encounter Overhaul (WIP)          | [Browse](./v5/) |
-| v6      | Difficulty Refinement & S7 Update | —               |
+- [v1](./v1/) - Base difficulty
+- [v2](./v2/) - Custom events update
+- [v3](./v3/) - Gameplay expansion
+- [v4](./v4/) - Combat Expansion
+- [v5](./v5/) - Encounter Overhaul (WIP)
+- v6 - Difficulty Refinement & S7 Update
 
 Archived presets, documentation, and manuals are organized by major version.
