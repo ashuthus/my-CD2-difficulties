@@ -1,5 +1,5 @@
 {
-  "Name": "Red Alert Protocol v5.6",
+  "Name": "Red Alert Protocol v5.7",
   "Description": "
 
   !! Host requires CD2 update 18 or newer !!
@@ -36,6 +36,7 @@
   - Added a Halloween event featuring Elite Halloween Skull
 
   Recent Changes:
+    v5.7 - Adjusted RED ALERT Difficulty during the On-site Refining phase by player count
     v5.6 - Adjusted mission-specific multipliers based on the Haz5 P4 scaling (x1.4 instead of x1.5)
     v5.6 - Adjusted RED ALERT Phase WaveSpawner distances based on DuringDefend
     v5.6 - Increased Encounter Difficulty while reducing extreme difficulty rolls
@@ -474,6 +475,17 @@
           "FinalEventB": 2,
           "FinalEventC": 3,
           "FinalEventD": 4
+        }
+      }
+    },
+    "PHASE_DIFFICULTY_MULTIPLIER": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByMissionType",
+        "Default": 1,
+        "Refinery": {
+          "Mutate": "ByPlayerCount",
+          "Values": [ 1.2, 1.2, 1.3, 1.4 ]
         }
       }
     },
@@ -2580,7 +2592,11 @@
       "Interval": 20,
       "SpawnOnEnable": true,
       "Enemies": [ "ED_Spider_Grunt" ],
-      "Difficulty": 82,
+      "Difficulty": {
+        "Mutate": "Multiply",
+        "A": 82,
+        "B": { "Var": "PHASE_DIFFICULTY_MULTIPLIER" }
+      },
       "Distance": {
         "Mutate": "If",
         "Condition": {
@@ -2618,7 +2634,11 @@
         ],
         "Weights": [ 24, 55, 48 ]
       },
-      "Difficulty": 90,
+      "Difficulty": {
+        "Mutate": "Multiply",
+        "A": 90,
+        "B": { "Var": "PHASE_DIFFICULTY_MULTIPLIER" }
+      },
       "Distance": {
         "Mutate": "If",
         "Condition": {
@@ -2656,7 +2676,11 @@
         ],
         "Weights": [ 15, 10, 6 ]
       },
-      "Difficulty": 65,
+      "Difficulty": {
+        "Mutate": "Multiply",
+        "A": 65,
+        "B": { "Var": "PHASE_DIFFICULTY_MULTIPLIER" }
+      },
       "Distance": {
         "Mutate": "If",
         "Condition": {
@@ -2686,7 +2710,11 @@
       "Interval": 20,
       "SpawnOnEnable": true,
       "Enemies": [ "ED_Spider_Exploder" ],
-      "Difficulty": 82,
+      "Difficulty": {
+        "Mutate": "Multiply",
+        "A": 82,
+        "B": { "Var": "PHASE_DIFFICULTY_MULTIPLIER" }
+      },
       "Distance": {
         "Mutate": "If",
         "Condition": {
@@ -2723,7 +2751,11 @@
         ],
         "Weights": [ 4, 6 ]
       },
-      "Difficulty": 90,
+      "Difficulty": {
+        "Mutate": "Multiply",
+        "A": 90,
+        "B": { "Var": "PHASE_DIFFICULTY_MULTIPLIER" }
+      },
       "Distance": {
         "Mutate": "If",
         "Condition": {
@@ -2760,7 +2792,11 @@
         ],
         "Weights": [ 6, 4 ]
       },
-      "Difficulty": 65,
+      "Difficulty": {
+        "Mutate": "Multiply",
+        "A": 65,
+        "B": { "Var": "PHASE_DIFFICULTY_MULTIPLIER" }
+      },
       "Distance": {
         "Mutate": "If",
         "Condition": {

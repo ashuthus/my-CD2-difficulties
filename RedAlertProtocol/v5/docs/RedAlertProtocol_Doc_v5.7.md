@@ -1,6 +1,6 @@
 # Red Alert Protocol
 
-> This doc is based on Red Alert Protocol v5.6.
+> This doc is based on Red Alert Protocol v5.7.
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -362,6 +362,7 @@ Expect highly aggressive enemies and occasionally overtuned behavior.
       - Adjusted Mactera and Ranged Wave selection weights to better reflect vanilla enemy rarities
     - Spawn Patterns
       - Changed Ranged to use a Constant Pressure spawn pattern
+      - Adjusted RED ALERT Difficulty during the On-site Refining phase by player count (x1.2 / x1.2 / x1.3 / x1.4)
     - Notifications & Fixes
       - Moved both notification timings 2 seconds earlier
       - Fixed timing inconsistencies when RED ALERT is retriggered

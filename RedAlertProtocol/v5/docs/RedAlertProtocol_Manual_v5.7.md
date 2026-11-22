@@ -1,6 +1,6 @@
 # Red Alert Protocol Manual
 
-> This manual is based on Red Alert Protocol v5.6.
+> This manual is based on Red Alert Protocol v5.7.
 
 独自仕様が増えすぎたので、自分用にもマニュアルを作成。  
 とりあえずAIに丸投げしたので、細かい所はそのうち修正予定。
@@ -517,6 +517,7 @@ RAPでは敵を役割ごとのグループに分けています。
 | Melee Special  | Youngling    | Elite Youngling         |  25.0% |          2 |
 
 ※ Spreader系、Bomber系はBiomeによって昇進候補が変化するため、実際の昇進確率が表記と異なる場合があります。
+
 ※ Elite Frost BomberはMagma Core、Elite Fireball SpreaderはGlacial Strataでは昇進しません。
 
 ### Enemy List
@@ -678,8 +679,8 @@ Swarmが発生しないEgg Ambushの敵数が増加します。
 
 破損したPipelineを修理している間の敵圧が軽減されています。 (バニラHaz5と同等程度)
 
-精製フェーズはRED ALERTの発生対象にもなっており、  
-低確率で追加の増援が発生します。
+精製フェーズはRED ALERTの発生対象にもなっており、低確率で追加の増援が発生します。  
+このフェーズで発生するRED ALERTに限り、Difficultyをプレイヤー数に応じてx1.2 / x1.2 / x1.3 / x1.4に調整しています。
 
 ### Salvage Operation
 

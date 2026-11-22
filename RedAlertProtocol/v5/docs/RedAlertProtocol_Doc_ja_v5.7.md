@@ -1,6 +1,6 @@
 # Red Alert Protocol
 
-> This doc is based on Red Alert Protocol v5.6.
+> This doc is based on Red Alert Protocol v5.7.
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -362,6 +362,7 @@ Aggressive Enemiesと組み合わせた場合、
       - Mactera / Ranged Waveの抽選Weightをバニラの敵Rarityに近づくよう調整
     - Spawn Patterns (出現パターン)
       - Rangedの出現パターンをConstant Pressure型に変更
+      - On-site Refiningの精製フェーズ中に発生するRED ALERTのDifficultyをプレイヤー数に応じて調整 (x1.2 / x1.2 / x1.3 / x1.4)
     - Notifications & Fixes (通知・修正)
       - 通知タイミングをそれぞれ2秒早めるよう調整
       - 再トリガー時に発生タイミングがずれる問題を修正
