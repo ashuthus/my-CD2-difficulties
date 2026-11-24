@@ -397,9 +397,7 @@ Expect highly aggressive enemies and occasionally overtuned behavior.
       - Change death carve diameter to match a normal Bulk Detonator
       - Remove meatballs on death
   - Expanded RED ALERT mechanics
-    - Extend RED ALERT to mission event phases in On-site Refining, Salvage Operation, and Escort Duty
     - Rework additional Wave patterns and their Difficulty distribution
-    - Readjust occurrence rate, targeting roughly one RED ALERT every 2.5 missions assuming two Swarms per mission
     - Test additional Wave patterns:
       - Peak: Follow the original Swarm spawn curve
       - Sustain: Compensate for the original Swarm's declining spawn intensity to maintain consistent spawn pressure throughout the Swarm

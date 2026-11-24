@@ -397,9 +397,7 @@ Aggressive Enemiesと組み合わせた場合、
       - 死亡時のCarve直径を通常のBulk Detonatorと同じ値に変更
       - 死亡時のMeatballを削除
   - RED ALERTシステムの拡張
-    - On-site Refining、Salvage Operation、Escort DutyのイベントフェーズをRED ALERTの発生対象に追加
     - 追加WaveのパターンおよびDifficulty配分を見直し
-    - 1ミッション2 Swarmを基準に、約2.5ミッションに1回程度を目標として発生率を再調整
     - 追加Waveパターンを検証
       - Peak: Swarm本来のSpawn曲線を維持するパターン
       - Sustain: Swarm後半のSpawn量の減少を補完し、Swarm全体を通して一定のSpawn圧を維持するパターン
